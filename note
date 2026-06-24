@@ -1,0 +1,49 @@
+ Spring Boot Kafka Event-Driven MicroServices Architecture with Multiple Consumers
+Main object
+To create a couple of micro services and use kafka broker as the messaging system for all synchronous communication between the multiple micro services.
+
+Todo
+-What is event driven MicroServices architecture, how it works and what is it advantages.
+-Create microservices
+-How to configure kafka
+-How to create a producer and Consumer
+-How to use kafka to communicate with producers and consumers
+    What is event driven MicroServices architecture(EDA)
+EDA is a software design pattern in which decoupled applications can
+asynchronously publish and subscribe to events via an event broker/message broker.
+
+In EDA, applications communicate with each-other by sending and receiving events or message.
+EDA is often referred to as "Asynchronous communication"
+
+    How EDA works and what is it advantages
+In EDA, we create multiple micro services
+And we use a message broker as a messaging system for asynchronous communication between multiple micro services
+    Advantages of EDA
+-Improves Flexibility and Maintainability: each service do a specific thing and they are independent.
+-High Scalability: You can just create another service that will start consuming the event from the message broker without interfering with other services.
+-It improves the availability: If one micro service goes down, it wont affect others.
+
+    Install and setup kafka on windows
+search - apache kafka download
+https://kafka.apache.org/quickstart/
+-After unzipping
+-cd to the kafka folder
+    step 1 - Generate a Cluster UUID
+bin\windows\kafka-storage.bat random-uuid
+-Format Log Directories
+bin\windows\kafka-storage.bat format --standalone -t CLUSTER_ID -c config/server.properties
+    step 2 - Start the Kafka Server
+bin\windows\kafka-server-start.bat config/server.properties
+Once the Kafka server has successfully launched, you will have a basic Kafka environment running and ready to use.
+    step 3 - Create a topic to store your events
+.\ represents current directory
+.\bin\windows\kafka-topics.bat --create --topic topic-example --bootstrap-server localhost:9092
+    step 4 - Write some events into the topic
+.\bin\windows\kafka-console-producer.bat --topic topic-example --bootstrap-server localhost:9092
+ >Hello world
+ >kafka topic event
+ >demo 1
+ >demo2
+ ctrl + c to exist
+    step 5 consume/Read the event from the kafka topic
+.\bin\windows\kafka-console-consumer.bat --topic topic-example --from-beginning --bootstrap-server localhost:9092
