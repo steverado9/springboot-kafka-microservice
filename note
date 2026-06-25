@@ -47,3 +47,30 @@ Once the Kafka server has successfully launched, you will have a basic Kafka env
  ctrl + c to exist
     step 5 consume/Read the event from the kafka topic
 .\bin\windows\kafka-console-consumer.bat --topic topic-example --from-beginning --bootstrap-server localhost:9092
+
+Change the port for each of the project in their application.properties
+after keeping the port for order service as 8080, and changing for stock service and email service,
+Run all the micro service on different port
+    Create DTO to transfer data between producer and consumer
+create dto class in Base domain
+    How to configure kafka producer in the order service project
+order service will act as a producer
+we will configure kafka producer in our order service
+order service can publish event to the kafka topic
+make sure kafka server is running on your local machine
+after configuring in the application.properties, start order_service project
+    How to create a kafka producer to produce event and send the event to the kafka broker
+add base-domains as a dependency in order-service project pom.xml
+    create a restApi that will take an order from the client
+create an orderController package
+    How to configure a consumer in a stock-service, email-service in a micro-service project
+This consumers will read the message from the kafka topic.
+-go to stock-service application.properties file
+spring boot provides auto configuration to configure kafka consumer.
+If we have multiple consumers that are consuming the topic, we have to assign the consumers to different groups.
+    create a kafka consumer in stock-service project so that stock service can consume or read the message from the kafka topic
+run the stock service project and order service project
+then go to postman and make a post request to "http://localhost:8080/api/v1/orders"
+The order service sends an event to the kafka broker and the stock-service consumes the event/topic
+    Email service consumes the order service event from the kafka broker
+
